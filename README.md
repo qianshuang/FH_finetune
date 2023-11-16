@@ -3,8 +3,8 @@
 deepspeed --include localhost:1 fine-tune.py \
 --report_to "none" \
 --data_path "data/belle_chat_ramdon_10k.json" \
---model_name_or_path "/mnt/models/baichuan-inc/Baichuan2-13B-Chat" \
---output_dir "/mnt/models/finetune/Baichuan2-13B-Chat" \
+--model_name_or_path "/opt/qs/aliendao/dataroot/models/baichuan-inc/Baichuan2-13B-Chat" \
+--output_dir "/opt/qs/aliendao/dataroot/models/finetune/Baichuan2-13B-Chat" \
 --model_max_length 4096 \
 --num_train_epochs 2 \
 --per_device_train_batch_size 3 \
