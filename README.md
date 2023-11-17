@@ -7,7 +7,7 @@ deepspeed --include localhost:1 fine-tune.py \
 --output_dir "/opt/qs/aliendao/dataroot/models/finetune/Baichuan2-13B-Chat" \
 --model_max_length 4096 \
 --num_train_epochs 2 \
---per_device_train_batch_size 3 \
+--per_device_train_batch_size 4 \
 --gradient_accumulation_steps 2 \
 --save_strategy epoch \
 --learning_rate 2e-5 \

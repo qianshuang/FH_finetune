@@ -51,7 +51,7 @@ class SupervisedDataset(Dataset):
             assistant_tokens=[196],
     ):
         super(SupervisedDataset, self).__init__()
-        self.data = json.load(open(data_path))[:100]
+        self.data = json.load(open(data_path))[:10]
         self.tokenizer = tokenizer
         self.model_max_length = model_max_length
         self.user_tokens = user_tokens
