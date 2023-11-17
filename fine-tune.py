@@ -117,8 +117,7 @@ def train():
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         trust_remote_code=True,
-        cache_dir=training_args.cache_dir,
-        device_map={"": "cuda:1"}
+        cache_dir=training_args.cache_dir
     )
     tokenizer = transformers.AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
