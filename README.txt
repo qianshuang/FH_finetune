@@ -1,5 +1,4 @@
 # 微调训练
-
 deepspeed --include localhost:1 fine-tune.py \
 --report_to "none" \
 --data_path "data/belle_chat_ramdon_10k.json" \
@@ -22,5 +21,5 @@ deepspeed --include localhost:1 fine-tune.py \
 --gradient_checkpointing True \
 --deepspeed ds_config.json \
 --bf16 True \
---tf32 True \
+--tf32 True \  # TF32为用于训练和推理的AI应用程序提供了巨大的开箱即用性能提升，零代码更改，同时能够保持FP32级别的准确性。
 --use_lora True
