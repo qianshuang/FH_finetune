@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*
 
 import json
+import random
 
-with open("/Users/wcy/workspace/FH_finetune/data/ft_baichuan_data.json", 'r') as json_file:
-    qa_dict = json.load(json_file)
+data_train = json.load(open("../data/ft_baichuan_data.json"))
+print("data_train length: {}".format(len(data_train)))
 
-res = []
-for item in qa_dict:
-    item["conversations"][0]["value"] = item["conversations"][0]["value"][0]["content"]
-    res.append(item)
+data_ori = json.load(open("../data/belle_chat_ramdon_10k.json"))
+print("data_ori length: {}".format(len(data_ori)))
 
-with open("/Users/wcy/workspace/FH_finetune/ft_baichuan_data.json", 'w') as f:
-    f.write(json.dumps(res, ensure_ascii=False))
+data_merge = data_train + data_ori[:5000]
+print("data_merge length: {}".format(len(data_merge)))
+
+random.shuffle(data_merge)
+print(data_merge[:5])

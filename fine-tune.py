@@ -3,7 +3,7 @@
 # import os
 #
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 要写在import torch之前才有效。日志打印的有效GPU是错误的
-
+import random
 from typing import Optional, Dict
 from dataclasses import dataclass, field
 import json
@@ -51,7 +51,14 @@ class SupervisedDataset(Dataset):
             assistant_tokens=[196],
     ):
         super(SupervisedDataset, self).__init__()
-        self.data = json.load(open(data_path))[:10]
+
+        # 混合数据并shuffle
+        data_ori = json.load(open("../data/belle_chat_ramdon_10k.json"))
+        data_train = json.load(open(data_path))
+        data_merge = data_train + data_ori[:5000]
+        random.shuffle(data_merge)
+        self.data = data_merge
+
         self.tokenizer = tokenizer
         self.model_max_length = model_max_length
         self.user_tokens = user_tokens
@@ -66,6 +73,7 @@ class SupervisedDataset(Dataset):
 
             labels.append(id_)
         print("label:", self.tokenizer.decode(labels))
+        print("train data length: {}".format(len(self.data)))
 
     def __len__(self):
         return len(self.data)

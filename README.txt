@@ -1,7 +1,7 @@
 # 微调训练
 deepspeed --include localhost:1 fine-tune.py \
---report_to "none" \
---data_path "data/belle_chat_ramdon_10k.json" \
+--report_to "none" \  # 或者"tensorboard"
+--data_path "data/ft_baichuan_data.json" \
 --model_name_or_path "/opt/qs/aliendao/dataroot/models/baichuan-inc/Baichuan2-13B-Chat" \
 --output_dir "/opt/qs/aliendao/dataroot/models/finetune/Baichuan2-13B-Chat" \
 --model_max_length 4096 \
