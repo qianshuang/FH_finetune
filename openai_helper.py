@@ -13,7 +13,7 @@ import requests
 import openai
 from openai.error import RateLimitError, APIError
 
-ak = "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"
+ak = "sk-bRqg********************"
 
 
 def get_emb(query_arr):

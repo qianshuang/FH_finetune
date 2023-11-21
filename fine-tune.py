@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*
 
-# import os
-#
+import os
+
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"  # 要写在import torch之前才有效。日志打印的有效GPU是错误的
 import random
+import shutil
 from typing import Optional, Dict
 from dataclasses import dataclass, field
 import json
@@ -53,7 +54,7 @@ class SupervisedDataset(Dataset):
         super(SupervisedDataset, self).__init__()
 
         # 混合数据并shuffle
-        data_ori = json.load(open("../data/belle_chat_ramdon_10k.json"))
+        data_ori = json.load(open("data/belle_chat_ramdon_10k.json"))
         data_train = json.load(open(data_path))
         data_merge = data_train + data_ori[:5000]
         random.shuffle(data_merge)
@@ -158,6 +159,9 @@ def train():
     trainer.train()
     trainer.save_state()
     trainer.save_model(output_dir=training_args.output_dir)
+
+    shutil.copy2(os.path.join(model_args.model_name_or_path, "tokenization_baichuan.py"), training_args.output_dir)
+    shutil.copy2(os.path.join(model_args.model_name_or_path, "generation_config.json"), training_args.output_dir)
 
 
 if __name__ == "__main__":
